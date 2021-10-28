@@ -28,6 +28,11 @@ QString ITask::desc() const
     return m_desc;
 }
 
+int ITask::progress() const
+{
+    return m_progress.load();
+}
+
 ITask::Status ITask::status() const
 {
     return static_cast<Status>(m_status.load());
@@ -51,6 +56,12 @@ QDateTime ITask::datetimeEnded() const
 void ITask::setDesc(const QString& desc)
 {
     m_desc = desc;
+}
+
+void ITask::setProgress(int percent)
+{
+    m_progress.store(percent);
+    emit progressChanged(percent);
 }
 
 void ITask::setStatus(Status s)

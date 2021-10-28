@@ -25,7 +25,7 @@ class ITaskListDelegate : public QStyledItemDelegate
     };
 
     int margin(const QStyleOptionViewItem& option) const {
-        return option.fontMetrics.height() - option.fontMetrics.lineSpacing();
+        return option.fontMetrics.lineSpacing() / 10;
     }
     QRect abortButtonArea(const QStyleOptionViewItem& option) const {
         int m = margin(option);

@@ -51,6 +51,7 @@ QVariant ITaskListModel::data(const QModelIndex& index, int role) const
     case DataRole::Result       : return ptr->result();
     case DataRole::DatetimeStart: return ptr->datetimeStarted();
     case DataRole::DatetimeEnd  : return ptr->datetimeEnded();
+    case DataRole::Progress     : return ptr->progress();
     default:
         break;
     }

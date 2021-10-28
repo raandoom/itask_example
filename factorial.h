@@ -19,6 +19,7 @@ public:
 
         qint64 res = 1;
         for (qint64 i = 1; i <= m_fac; i++) {
+            setProgress(static_cast<double>(i) / m_fac * 100.);
             res *= i;
 
             if (isCanceled()) {
@@ -54,6 +55,7 @@ public:
 
         qint64 res = 1;
         for (qint64 i = 2 - m_fac % 2; i <= m_fac; i += 2) {
+            setProgress(static_cast<double>(i) / m_fac * 100.);
             res *= i;
 
             if (isCanceled()) {

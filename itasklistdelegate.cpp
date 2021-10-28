@@ -46,6 +46,21 @@ void ITaskListDelegate::paint(QPainter* painter,
     painter->setPen(QPen(Qt::lightGray,2));
     painter->drawRect(option.rect);
 
+    int progressHeight = 4;
+    painter->drawLine(option.rect.left(),
+                      option.rect.top() + progressHeight / 2,
+                      option.rect.right(),
+                      option.rect.top() + progressHeight / 2);
+
+    int progress =
+            index.data(ITaskListModel::DataRole::Progress).toInt();
+
+    painter->setPen(QPen(Qt::green,progressHeight));
+    painter->drawLine(option.rect.left(),
+                      option.rect.top() + progressHeight / 2,
+                      option.rect.left() + option.rect.width() * static_cast<double>(progress) / 100.,
+                      option.rect.top() + progressHeight / 2);
+
     ITask::Status status =
             index.data(ITaskListModel::DataRole::Status).value<ITask::Status>();
 

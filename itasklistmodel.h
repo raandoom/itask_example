@@ -20,6 +20,7 @@ public:
         Result,
         DatetimeStart,
         DatetimeEnd,
+        Progress,
     };
 
     explicit ITaskListModel(QObject* parent = nullptr);

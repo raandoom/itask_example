@@ -28,6 +28,7 @@ public:
 
     QString desc() const;
 
+    int progress()  const;
     Status status() const;
     qint64 result() const;
 
@@ -42,6 +43,7 @@ protected:
 
     void setDesc(const QString& desc);
 
+    void setProgress(int percent);
     void setStatus(Status s);
     void setResult(qint64 res);
 
@@ -49,11 +51,13 @@ protected:
     void setDatetimeEnded(const QDateTime& dt);
 
 private:
+    QAtomicInteger<int>     m_progress;
     QAtomicInteger<int>     m_status;
     QAtomicInt              m_cancel = 0;
     QAtomicInteger<qint64>  m_res;
 
 signals:
+    void progressChanged(int progress);
     void finished(ITask::Status s, qint64 res);
 };
 

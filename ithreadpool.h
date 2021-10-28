@@ -35,6 +35,10 @@ public:
             ITask* task = qobject_cast<ITask*>(QObject::sender());
             emit taskEnded(m_tasks.take(task));
         });
+        connect(task.data(),&ITask::progressChanged,this,[this](int percent) {
+            ITask* task = qobject_cast<ITask*>(QObject::sender());
+            emit taskProgress(m_tasks.value(task),percent);
+        });
 
         m_pool->start(task.data());
         return task;
@@ -46,6 +50,7 @@ public:
 
 signals:
     void taskEnded(const QSharedPointer<ITask>& task);
+    void taskProgress(const QSharedPointer<ITask>& task, int percent);
 };
 
 #endif // ITHREADPOOL_H

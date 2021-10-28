@@ -39,6 +39,9 @@ MainWindow::MainWindow(QWidget *parent)
         m_running_model->removeTask(task);
         m_finished_model->addTask(task);
     });
+    connect(m_pool,&IThreadPool::taskProgress,this,[this]() {
+        ui->runningListView->viewport()->update();
+    });
 }
 
 MainWindow::~MainWindow()
