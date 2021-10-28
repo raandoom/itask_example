@@ -15,7 +15,7 @@ ITask::~ITask()
 
 void ITask::cancel()
 {
-    m_cancel.storeRelaxed(1);
+    m_cancel.store(1);
 }
 
 bool ITask::isCanceled() const
@@ -30,12 +30,12 @@ QString ITask::desc() const
 
 ITask::Status ITask::status() const
 {
-    return static_cast<Status>(m_status.loadRelaxed());
+    return static_cast<Status>(m_status.load());
 }
 
 qint64 ITask::result() const
 {
-    return m_res.loadRelaxed();
+    return m_res.load();
 }
 
 QDateTime ITask::datetimeStarted() const
@@ -55,12 +55,12 @@ void ITask::setDesc(const QString& desc)
 
 void ITask::setStatus(Status s)
 {
-    m_status.storeRelaxed(static_cast<int>(s));
+    m_status.store(static_cast<int>(s));
 }
 
 void ITask::setResult(qint64 res)
 {
-    m_res.storeRelaxed(res);
+    m_res.store(res);
 }
 
 void ITask::setDatetimeStarted(const QDateTime& dt)

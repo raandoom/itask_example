@@ -8,7 +8,7 @@ ITaskListModel::ITaskListModel(QObject* parent) :
 void ITaskListModel::addTask(const QSharedPointer<ITask>& ptr)
 {
     beginResetModel();
-    m_data.insert(ptr.get(),ptr);
+    m_data.insert(ptr.data(),ptr);
     endResetModel();
 
     emit dataChanged(QModelIndex(),QModelIndex());
@@ -16,7 +16,7 @@ void ITaskListModel::addTask(const QSharedPointer<ITask>& ptr)
 void ITaskListModel::removeTask(const QSharedPointer<ITask>& ptr)
 {
     beginResetModel();
-    m_data.remove(ptr.get());
+    m_data.remove(ptr.data());
     endResetModel();
 
     emit dataChanged(QModelIndex(),QModelIndex());

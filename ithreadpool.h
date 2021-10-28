@@ -29,14 +29,14 @@ public:
     template<typename T, typename ...Args>
     QSharedPointer<ITask> createTask(Args... a) {
         QSharedPointer<ITask> task = QSharedPointer<T>::create(a...);
-        m_tasks.insert(task.get(),task);
+        m_tasks.insert(task.data(),task);
 
-        connect(task.get(),&ITask::finished,this,[this]() {
+        connect(task.data(),&ITask::finished,this,[this]() {
             ITask* task = qobject_cast<ITask*>(QObject::sender());
             emit taskEnded(m_tasks.take(task));
         });
 
-        m_pool->start(task.get());
+        m_pool->start(task.data());
         return task;
     }
 
